@@ -107,6 +107,7 @@
     color: white;
 }
 
+
 .container p{
     font-size: 20px;
     color: var(--dark80);
@@ -116,10 +117,9 @@
 
 .container .portfolio_table th,td{
     padding: 10px;
-    letter-spacing: 0.3px;
     font-family: 'Open Sans', sans-serif;
     color: var(--dark);
-    font-size: 18px
+    font-size: 20px
 }
 
 .container .portfolio_table tr{
@@ -127,11 +127,16 @@
 }
 
 .container .portfolio_table{
-    width: 80%;
     border-collapse: collapse;
 }
 
 .container .table_stockname{
+    font-family: 'Poppins', sans-serif;
+    font-size: 19px;
+    width: 10%;
+}
+
+.container .table_stockcomp{
     font-family: 'Poppins', sans-serif;
     font-size: 19px;
     width: 20%;
@@ -146,7 +151,7 @@
 .container .table_price{
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
-    width: 32%;
+    width: 30%;
 }
 
 .find_result .btnFindResult{
