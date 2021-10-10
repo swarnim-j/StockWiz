@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
+
+:root {
+--accent: #0c4e99;
+--accentHover: #2362aa;
+--dark: #183650;
+--dark80: rgba(48, 70, 89, 0.8);
+--dark60: rgba(48, 70, 89, 0.6);
+--light: #dceefc;
+--pink: #fab4b6;
+--transition: all 0.3s ease 0s;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+  }
+.container{
+    height: 100vh;
+    width: 100%;
+    padding-top: 1%;
+    padding-left: 3%;
+    padding-right: 5%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+    .topnav{
+        height: 25vh;
+        display: flex;
+        align-items: center;
+        background-color: var(--pink);
+        width:100%;
+    }
+
+    .topnav a {
+        float: left;
+        display: block;
+        color: var(--dark);
+        text-align: center;
+        padding-left: 6%;
+        padding-right: 2%;
+        text-decoration: none;
+        font-size: 25px;
+        font-family: 'Open Sans', sans-serif;
+        
+    }
+
+    .topnav a:hover {
+        color: var(--dark80);
+    }
+
+.logo{
+    margin-left: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+.topnav .site_name{
+    font-family: 'Cabin', sans-serif;
+    font-size: 35px;
+}
+
+.select_company{
+    font-family: 'Open Sans', sans-serif;
+    color: var(--dark);
+    font-size: 18px
+}
+
+.select_company .input_stockname{
+    width:100px;
+    padding: 4px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: var(--dark);
+    border-color: var(--light);
+    border-radius: 8px;
+    border-width: 1.5px;
+}
+
+.select_company .input_stock_quantity{
+    width:100px;
+    padding: 4px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: var(--dark);
+    border-color: var(--light);
+    border-radius: 8px;
+    border-width: 1.5px;
+}
+
+.select_company .btnAddStock{
+    display: inline-block;
+    background-color: var(--dark);
+    border-radius: 17px;
+    padding: 7px 7px;
+    width: 120px;
+    margin-left: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: white;
+}
+
+.container p{
+    font-size: 20px;
+    color: var(--dark80);
+    font-family: 'Lato', sans-serif;
+
+}
+
+.container .portfolio_table th,td{
+    padding: 10px;
+    letter-spacing: 0.3px;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--dark);
+    font-size: 18px
+}
+
+.container .portfolio_table tr{
+    border-bottom: 1px solid var(--accent);
+}
+
+.container .portfolio_table{
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.container .table_stockname{
+    font-family: 'Poppins', sans-serif;
+    font-size: 19px;
+    width: 20%;
+}
+
+.container .table_stockquantity{
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    width: 16%;
+}
+
+.container .table_price{
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    width: 32%;
+}
+
+.find_result .btnFindResult{
+    display: inline-block;
+    background-color: var(--dark);
+    border-radius: 17px;
+    padding: 7px 7px;
+    width: 200px;
+    margin-left: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    color: white;
+    display: none;
+}
+
+.container .find_result .result_price{
+    font-family: 'Open Sans', sans-serif;
+    color: var(--dark);
+    font-size: 25px;
+    float: right;
+}
+
+.container .find_result .result_price{
+    float: left;
+}
+
+.container .find_result a{
+    font-family: 'Open Sans', sans-serif;
+    color: var(--dark);
+    font-size: 13px;
+}

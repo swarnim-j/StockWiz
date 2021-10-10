@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,500&display=swap');
+
+
+:root {
+--accent: #0c4e99;
+--accentHover: #2362aa;
+--dark: #183650;
+--dark80: rgba(48, 70, 89, 0.8);
+--dark60: rgba(48, 70, 89, 0.6);
+--light: #dceefc;
+--pink: #fab4b6;
+--transition: all 0.3s ease 0s;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+.container{
+  height: 100vh;
+  width: 100%;
+  background-image: url(/images/background_home.jpg);
+  background-position: center;
+  background-size: cover;
+  padding-top: 1%;
+  padding-left: 3%;
+  padding-right: 5%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.topnav{
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  background-color: var(--pink);
+  width:50%;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: var(--dark);
+  text-align: center;
+  padding-left: 10%;
+  padding-right: 7%;
+  text-decoration: none;
+  font-size: 25px;
+  font-family: 'Open Sans', sans-serif;
+  
+}
+
+.topnav a:hover {
+  color: var(--dark80);
+}
+
+.logo{
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+nav{
+  flex: 1;
+  padding-left: 60px;
+}
+
+nav ul li{
+  display: inline-block;
+  list-style: none;
+  margin: 50px;
+  font-size: 21px;
+}
+
+nav ul li a{
+  text-decoration: none;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  color: var(--dark);
+}
+
+.info_main h1{
+  font-size: 75px;
+  font-weight: 100;
+  margin-top: 24px;
+  margin-bottom: 15px;
+  color: white;
+  font-family: 'Cabin', sans-serif;
+}
+
+.info_main p{
+  font-size: 19px;
+  margin-bottom: 15px;
+  color: var(--dark);
+  margin-left: 5px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.info_main{
+  padding-top: 6%;
+  padding-left: 10%;
+}
+
+.info_main a{
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.info_main .btnGetStarted{
+  display: inline-block;
+  background-color: var(--dark);
+  margin-left: 5px;
+  border-radius: 25px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  text-decoration: none;
+  
+}
+
+.info_main .btnGetStarted:hover{
+  color: var(--light);
+}
