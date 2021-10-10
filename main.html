@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Predict Stock</title>
+        <title>Predict Stock | StockWiz</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles/styles_main.css">
@@ -27,6 +27,10 @@
                 &nbsp;
                 <input type="number" id="input_stock_quantity" class="input_stock_quantity" 
                 placeholder="Quantity" min="1">
+                &nbsp;&nbsp;
+                <a href="https://www.nasdaq.com/market-activity/stocks/screener">
+                    <img src="images/info_icon.png" alt="info" height="25px">
+                </a>
                 <br><br>
                 <button class="btnAddStock" id="add_stock" onclick="getStockData()">Add Stock</button>
                 
@@ -35,7 +39,8 @@
             <div class="table">
                 <table hidden class="portfolio_table" id="portfolio_table">
                     <th>
-                        <td class="table_stockname">Stock Name</td>
+                        <td class="table_stockname">Symbol</td>
+                        <td class="table_stockcomp">Company</td>
                         <td class="table_stockquantity">Quantity</td>
                         <td class="table_price">Current Price (Today)</td>
                         <td class="table_price">Predicted Price (Tomorrow)</td>
