@@ -1,6 +1,7 @@
 let apikey = "FLNFOHIK3YIKP4JI";
 let apiTicker = "";
 let quantityStock = 0;
+let companyName = "";
 let data_temporal_resolutions = 'Daily'; //Daily
 let input_dataset = [];
 let result = [];
@@ -13,12 +14,13 @@ let learningrate = 0.01; //0.01
 let n_hiddenlayers = 4; //4
 
 let arr_name = [];
+let arr_comp = [];
 let arr_quant = [];
 let arr_price = [];
 let arr_predprice = [];
 
-let rate_a=1.03;
-let rate_b=0.9;
+let rate_a = 1.03;
+let rate_b = 0.9;
 
 let n_rows = 0;
 
@@ -42,13 +44,15 @@ function getStockData() {
   let btnAddStock = document.getElementById('add_stock');
   btnAddStock.style.display = "none";
 
-  let btnFindResult=document.getElementById('find_result');
-  btnFindResult.style.display="none";
+  let btnFindResult = document.getElementById('find_result');
+  btnFindResult.style.display = "none";
 
   let progressBar = document.getElementById('progress');
   let labelProgressBar = document.getElementById('progress_label');
 
   let requestURL = "";
+
+  let URLTickerSearch = "https://financialmodelingprep.com/api/v3/search?query=" + apiTicker + "&limit=10&exchange=NASDAQ&apikey=" + "02dcff5344d9f577207a78d65f354764";
 
   if (data_temporal_resolutions == 'Daily') { //daily
     requestURL = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=" + apiTicker + "&outputsize=full&apikey=" + apikey;
@@ -68,8 +72,8 @@ function getStockData() {
     }
 
     console.log(daily);
-    
-    if (daily!=undefined) {
+
+    if (daily != undefined) {
 
       let symbol = data['Meta Data']['2. Symbol'];
       let last_refreshed = data['Meta Data']['3. Last Refreshed'];
@@ -85,7 +89,7 @@ function getStockData() {
 
       console.log(data_raw.length);
 
-      data_raw=data_raw.slice(0,Math.round(0.35*data_raw.length));
+      data_raw = data_raw.slice(0, Math.round(0.35 * data_raw.length));
 
       data_raw.reverse();
 
@@ -94,8 +98,8 @@ function getStockData() {
       if (data_raw.length < 1) {
         alert("Invalid Ticker");
         btnAddStock.style.display = "initial";
-        if(n_rows>0){
-          btnFindResult.style.display="initial";
+        if (n_rows > 0) {
+          btnFindResult.style.display = "initial";
         }
         return;
       }
@@ -109,8 +113,8 @@ function getStockData() {
       if (sma_vec.length < 32) {
         alert("Insufficient Data about Stock");
         btnAddStock.style.display = "initial";
-        if(n_rows>0){
-          btnFindResult.style.display="initial";
+        if (n_rows > 0) {
+          btnFindResult.style.display = "initial";
         }
         return;
       }
@@ -139,14 +143,21 @@ function getStockData() {
 
       onClickTrainModel();
     }
-    else{
+    else {
       alert("Invalid Ticker");
       btnAddStock.style.display = "initial";
-      if(n_rows>0){
-        btnFindResult.style.display="initial";
+      if (n_rows > 0) {
+        btnFindResult.style.display = "initial";
       }
       return;
     }
+  });
+
+  $.getJSON(URLTickerSearch, function (data) {
+
+    companyName = data[0]['name'];
+    console.log(companyName);
+
   });
 
 }
@@ -212,9 +223,9 @@ async function onClickTrainModel() {
 
   let pred_y = makePredictions(pred_X, result['model'], result['normalize']);
 
-  pred_y=rate_a*pred_y;
+  pred_y = rate_a * pred_y;
 
-  pred_y=pred_y-rate_b*(pred_y-data_raw[data_raw.length - 1]['price']);
+  pred_y = pred_y - rate_b * (pred_y - data_raw[data_raw.length - 1]['price']);
 
   pred_y = Math.round((pred_y + Number.EPSILON) * 100) / 100;
 
@@ -223,6 +234,7 @@ async function onClickTrainModel() {
 
   arr_name.push(apiTicker.toUpperCase());
   arr_quant.push(quantityStock);
+  arr_comp.push(companyName);
   arr_price.push(data_raw[data_raw.length - 1]['price']);
   arr_predprice.push(pred_y);
   n_rows++;
@@ -236,8 +248,8 @@ async function onClickTrainModel() {
   let btnAddStock = document.getElementById('add_stock');
   btnAddStock.style.display = "initial";
 
-  document.getElementById('input_stockname').value="";
-  document.getElementById("input_stock_quantity").value=1;
+  document.getElementById('input_stockname').value = "";
+  document.getElementById("input_stock_quantity").value = 1;
 
   //document.getElementById('predicted_price').innerHTML="The price is $"+pred_y;
 
@@ -271,11 +283,13 @@ function setTable() {
   var temp_col = row.insertCell(0);
   var stockname = row.insertCell(1);
   stockname.innerHTML = arr_name[n_rows - 1];
-  var stockquantity = row.insertCell(2);
+  var stockcomp = row.insertCell(2);
+  stockcomp.innerHTML = arr_comp[n_rows - 1];
+  var stockquantity = row.insertCell(3);
   stockquantity.innerHTML = arr_quant[n_rows - 1].toString();
-  var stockprice = row.insertCell(3);
+  var stockprice = row.insertCell(4);
   stockprice.innerHTML = "$" + arr_price[n_rows - 1].toString();
-  var stockprice_predict = row.insertCell(4);
+  var stockprice_predict = row.insertCell(5);
   stockprice_predict.innerHTML = "$" + arr_predprice[n_rows - 1];
   stockprice_predict.style.fontFamily = "Lato, sans-serif";
   stockprice_predict.style.color = "rgba(48, 70, 89, 0.8)"; //--dark80
@@ -283,53 +297,53 @@ function setTable() {
   apiTicker = "";
   quantityStock = 0;
 
-  let btnFindResult=document.getElementById('find_result');
-  if(n_rows>0){
-    btnFindResult.style.display="initial";
-  } else{
-    btnFindResult.style.display="none";
+  let btnFindResult = document.getElementById('find_result');
+  if (n_rows > 0) {
+    btnFindResult.style.display = "initial";
+  } else {
+    btnFindResult.style.display = "none";
   }
 }
 
-function findTotalResult(){
-  let sum=0.0;
-  let textResult=document.getElementById('result_text');
-  let priceResult=document.getElementById('result_price');
+function findTotalResult() {
+  let sum = 0.0;
+  let textResult = document.getElementById('result_text');
+  let priceResult = document.getElementById('result_price');
 
   let btnAddStock = document.getElementById('add_stock');
   btnAddStock.style.display = "none";
-  document.getElementById('find_result').style.display="none";
+  document.getElementById('find_result').style.display = "none";
 
-  for(var i=0;i<n_rows;i++){
-    let dif=arr_predprice[i]-arr_price[i];
-    sum+=arr_quant[i]*dif;
+  for (var i = 0; i < n_rows; i++) {
+    let dif = arr_predprice[i] - arr_price[i];
+    sum += arr_quant[i] * dif;
   }
-  sum=Math.round((sum + Number.EPSILON) * 100) / 100
-  if(sum>0){
-    textResult.innerHTML="Total Profit ";
-    priceResult.innerHTML="$"+sum.toString();
-    priceResult.style.color="green";
-  } else if(sum==0){
-    textResult.innerHTML="You broke even!";
-    priceResult.style.color="#183650";
-  } else{
-    textResult.innerHTML="Total Loss ";
-    priceResult.innerHTML="$"+(sum*(-1)).toString();
-    priceResult.style.color="red";
+  sum = Math.round((sum + Number.EPSILON) * 100) / 100
+  if (sum > 0) {
+    textResult.innerHTML = "Total Profit ";
+    priceResult.innerHTML = "$" + sum.toString();
+    priceResult.style.color = "green";
+  } else if (sum == 0) {
+    textResult.innerHTML = "You broke even!";
+    priceResult.style.color = "#183650";
+  } else {
+    textResult.innerHTML = "Total Loss ";
+    priceResult.innerHTML = "$" + (sum * (-1)).toString();
+    priceResult.style.color = "red";
   }
 
-  document.getElementById('restart_portfolio').style.display="initial";
+  document.getElementById('restart_portfolio').style.display = "initial";
 }
 
-function restartPortfolio(){
+function restartPortfolio() {
   arr_name = [];
   arr_quant = [];
   arr_price = [];
   arr_predprice = [];
-  n_rows=0;
-  document.getElementById('restart_portfolio').style.display="none";
-  document.getElementById("portfolio_table").style.display="none";
-  document.getElementById('add_stock').style.display="initial";
-  document.getElementById('input_stockname').value="";
-  document.getElementById("input_stock_quantity").value=1;
+  n_rows = 0;
+  document.getElementById('restart_portfolio').style.display = "none";
+  document.getElementById("portfolio_table").style.display = "none";
+  document.getElementById('add_stock').style.display = "initial";
+  document.getElementById('input_stockname').value = "";
+  document.getElementById("input_stock_quantity").value = 1;
 }
