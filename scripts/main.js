@@ -11,7 +11,7 @@ let window_size = 60;  //60
 let trainingsize = 97; //97
 let n_epochs = 3; //10
 let learningrate = 0.01; //0.01
-let n_hiddenlayers = 4; //4
+let n_hiddenlayers = 2; //4
 
 let arr_name = [];
 let arr_comp = [];
@@ -19,7 +19,7 @@ let arr_quant = [];
 let arr_price = [];
 let arr_predprice = [];
 
-let rate_a = 1.03;
+let rate_a = 1.05;
 let rate_b = 0.9;
 
 let n_rows = 0;
@@ -141,6 +141,13 @@ function getStockData() {
       labelProgressBar.style.display = "initial";
       progressBar.style.display = "initial";
 
+      $.getJSON(URLTickerSearch, function (data) {
+
+        companyName = data[0]['name'];
+        console.log(companyName);
+    
+      });
+
       onClickTrainModel();
     }
     else {
@@ -151,13 +158,6 @@ function getStockData() {
       }
       return;
     }
-  });
-
-  $.getJSON(URLTickerSearch, function (data) {
-
-    companyName = data[0]['name'];
-    console.log(companyName);
-
   });
 
 }
