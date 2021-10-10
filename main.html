@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Predict Stock</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles/styles_main.css">
+        <link rel="icon" href="/images/logo.png" type="image/x-icon">
+        <script src="scripts/model.js"></script><!--Main JavaScript file-->
+        <script src="scripts/main.js"></script><!--Tensorflow.js model-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script><!--JQuery for JSON-->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script><!--Tensorflow.js-->
+    </head>
+    <body>
+        <div class="topnav" id="mainNav">
+            <img src="images/logo.png" class="logo">
+            <a href="index.html" class="site_name">StockWiz</a>
+        </div>
+        <div class="container">
+            <br>
+            <div class="select_company">
+                Enter the name of the stock you want to predict: 
+                &nbsp;&nbsp;&nbsp;
+                <input type="text" id="input_stockname" class="input_stockname" placeholder="e.g. AAPL">
+                &nbsp;
+                <input type="number" id="input_stock_quantity" class="input_stock_quantity" 
+                placeholder="Quantity" min="1">
+                <br><br>
+                <button class="btnAddStock" id="add_stock" onclick="fetchDataFromTicker()">Add Stock</button>
+                
+            </div>
+            <br><br>
+            <div class="table">
+                <table hidden class="portfolio_table" id="portfolio_table">
+                    <th>
+                        <td class="table_stockname">Stock Name</td>
+                        <td class="table_stockquantity">Quantity</td>
+                        <td class="table_price">Current Price (Today)</td>
+                        <td class="table_price">Predicted Price (Tomorrow)</td>
+                    </th>
+                </table>
+            </div>
+            <br><br>
+            <div class="prediction_result">
+                <p id="predicted_price">
+                    <label hidden for="progress" id="progress_label">Training Model...</label>
+                    <progress hidden id="progress" value="0" max="100"> 0% </progress>
+                </p>
+            </div>
+            <br><br>
+            <div class="find_result">
+                <button class="btnFindResult" id="find_result" onclick="findTotalResult()">Find Total Profit/Loss</button>
+                <p id="result_text" class="result_text"></p>
+                <p id="result_price" class="result_price"></p>
+                <br><br><br>
+                <a hidden href="" onClick="restartPortfolio" id="restart_portfolio">Restart Portfolio?</a>                
+            </div>
+        </div>
+    </body>
+</html>
